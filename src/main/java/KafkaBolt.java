@@ -11,8 +11,16 @@ import java.util.Properties;
 
 public class KafkaBolt extends BaseRichBolt {
     private Producer<String,String> producer;
-    private String topicName="kafkatopic2";
+    private String topicName;
     private OutputCollector outputCollector;
+    
+    public KafkaBolt(String topicName) {
+        this.topicName = topicName;
+    }
+
+    public KafkaBolt() {
+    }
+    
     @Override
     public void prepare(Map conf, TopologyContext topologyContext, OutputCollector outputCollector) {
         Properties props = new Properties();
