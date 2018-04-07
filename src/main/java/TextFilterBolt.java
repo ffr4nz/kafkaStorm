@@ -30,13 +30,16 @@ public class TextFilterBolt extends BaseRichBolt  {
                 throw new RuntimeException(e);
             }
         }
-        if(sentence.contains(FILTER_KEY)){
-            _collector.emit(new Values(sentence));
-        }
+        if(sentence.contains(FILTER_KEY))
+            _collector.emit("stream1",new Values(sentence));
+        else
+            _collector.emit("stream2",new Values(sentence));
+        
         _collector.ack(tuple);
     }
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("kafka_text"));
+        declarer.declareStream("stream1",new Fields("kafka_text"));
+        declarer.declareStream("stream2", new Fields("kafka_text"));
     }
 }
