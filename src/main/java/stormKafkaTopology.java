@@ -1,11 +1,11 @@
-import backtype.storm.LocalCluster;
-import backtype.storm.utils.Utils;
-import storm.kafka.KafkaSpout;
-import storm.kafka.SpoutConfig;
-import storm.kafka.ZkHosts;
-import backtype.storm.Config;
-import backtype.storm.StormSubmitter;
-import backtype.storm.topology.TopologyBuilder;
+import org.apache.storm.LocalCluster;
+import org.apache.storm.utils.Utils;
+import org.apache.storm.kafka.KafkaSpout;
+import org.apache.storm.kafka.SpoutConfig;
+import org.apache.storm.kafka.ZkHosts;
+import org.apache.storm.Config;
+import org.apache.storm.StormSubmitter;
+import org.apache.storm.topology.TopologyBuilder;
 
 
 public class stormKafkaTopology {
@@ -18,7 +18,8 @@ public class stormKafkaTopology {
 
     public static void main(String[] args) throws Exception {
         int numSpoutExecutors = 1;
-        KafkaSpout kspout = buildKafkaSentenceSpout();
+        KafkaSpout kspout;
+        kspout = buildKafkaSentenceSpout();
         TextFilterBolt TFBolt = new TextFilterBolt();
         KafkaBolt KfBolt = new KafkaBolt("kafkatopic2");
         KafkaBolt KfBoltElse = new KafkaBolt("kafkatopic3");
